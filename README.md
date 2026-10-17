@@ -79,7 +79,7 @@ flowchart LR
 | Hosting | Vercel; frontend and `/api/*` on the same origin | [Deployment guide](docs/deployment.md) |
 | Billing | Stripe Checkout, webhooks, Customer Portal; test mode only | [Billing decision](docs/adr/0003-pricing-and-stripe-billing.md) |
 
-Pricing includes Starter, Professional, and Enterprise with monthly and annual options. **Billing is test mode only, depends on Stripe provisioning, and does not accept real payments.** Plan limits are displayed for comparison and are not enforced. Billing identity currently uses a signed browser cookie; user accounts are planned.
+Pricing includes Starter, Professional, and Enterprise with monthly and annual options. **Billing runs in a Stripe test-mode sandbox and does not accept real payments** (use card 4242 4242 4242 4242). Plan limits are displayed for comparison and are not enforced. Billing identity currently uses a signed browser cookie; user accounts are planned.
 
 ## Run locally
 
