@@ -1,3 +1,5 @@
+> **Presenters: use [demo-guide.md](demo-guide.md)** (exact clicks, what to say, screenshots, fallbacks). The slide deck is shared by Tray.
+
 # Final Presentation (Oct 20)
 
 **Owner:** Tray · Rehearsal: Oct 19
