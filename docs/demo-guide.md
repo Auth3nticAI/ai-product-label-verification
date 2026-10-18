@@ -1,7 +1,7 @@
 # VeriLabel demo guide
 
-**For:** Tray, Wenyi, Amzad, Vincent · **Demo:** Tue Oct 20 · **Rehearsal:** Mon Oct 19
-**Live app:** https://ai-product-label-verification.vercel.app · **Deck:** VeriLabel Demo Deck (Tray shares the link)
+**For:** the presenter (**one person** presents the whole demo; the team picks who) · **Demo:** Tue Oct 20 · **Rehearsal:** Mon Oct 19
+**Live app:** https://ai-product-label-verification.vercel.app · **Deck:** VeriLabel Demo Deck (link in the team chat)
 
 Every screenshot below is from the live site (Oct 18), captured by a real browser walking this exact script, including a Stripe test checkout. If the network fails on stage, show these instead.
 
@@ -15,25 +15,28 @@ Every screenshot below is from the live site (Oct 18), captured by a real browse
 - [ ] Open a **separate incognito window** for the pricing demo (each browser is its own workspace; one that already subscribed shows "Current plan" instead of a new checkout).
 - [ ] Tabs ready: the app, the deck, GitHub (a merged PR, Actions, `skills/labelguard-testing`).
 - [ ] Zoom the browser to 125% so the room can read the field table.
+- [ ] **Before Tuesday:** collect one example from each teammate for the AI slide (one thing they delegated to an agent, one thing they reviewed or rejected).
 
 ## Running order (≈12 minutes)
 
-| Time | Slides | Who | What |
-|---|---|---|---|
-| 0:00 | Cover, problem | Tray | The problem in one line |
-| 1:00 | How it works | Tray | Spec → photo → verdict; the four statuses |
-| 2:00 | Live demo | Wenyi | Steps 1–5 below |
-| 6:00 | Uncertain | Amzad | Why confidence matters (step 4) |
-| 7:00 | Pricing, Stripe | Tray | Step 6 below |
-| 9:00 | Architecture, quality | Tray, Vincent | How it's built and tested |
-| 10:30 | AI-assisted development | All | One delegated thing, one reviewed thing each |
-| 11:30 | Limits, close | Tray | Say the limits before anyone asks; Q&A |
+One presenter runs everything: slides and the live browser. Keep the deck in one window and the app in another (plus an incognito window for step 6).
+
+| Time | Slides | What |
+|---|---|---|
+| 0:00 | Cover, problem | The problem in one line |
+| 1:00 | How it works | Spec → photo → verdict; the four statuses |
+| 2:00 | Live demo | Steps 1–5 below |
+| 6:00 | Uncertain | Why confidence matters (step 4) |
+| 7:00 | Pricing, Stripe | Step 6 below |
+| 9:00 | Architecture, quality | How it's built and tested |
+| 10:30 | AI-assisted development | What the team delegated to agents, and what review caught |
+| 11:30 | Limits, close | Say the limits before anyone asks; Q&A |
 
 ---
 
 ## The script
 
-### 1. Home → Try a Sample Inspection (Wenyi)
+### 1. Home → Try a Sample Inspection
 
 ![Home page](assets/screenshots/01-home.jpg)
 
@@ -59,7 +62,7 @@ Upload `granola_wrong_net_weight.png` → **Verify Label**.
 
 > **Say:** "Expected 12 oz, the label says 10 oz. The close-up on the right is cropped from the photo so a reviewer sees the evidence."
 
-### 4. A blurry photo is *uncertain*, not *incorrect* (Amzad explains)
+### 4. A blurry photo is *uncertain*, not *incorrect*
 
 Switch the spec to **VitaCore Daily Multivitamin**, upload `vitamin_low_quality.jpg` → **Verify Label**.
 
@@ -75,7 +78,7 @@ Open **History**; your inspections are at the top. Click **View** on one.
 
 ![History](assets/screenshots/07-history.jpg)
 
-### 6. Pricing and Stripe (Tray; use the incognito window)
+### 6. Pricing and Stripe (use the incognito window)
 
 **Pricing** in the nav. Toggle **Annual** to show "2 months free", then back to Monthly.
 

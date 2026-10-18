@@ -1,18 +1,18 @@
-> **Presenters: use [demo-guide.md](demo-guide.md)** (exact clicks, what to say, screenshots, fallbacks). The slide deck is shared by Tray.
+> **Presenter: use [demo-guide.md](demo-guide.md)** (exact clicks, what to say, screenshots, fallbacks). One person presents the whole demo; the deck link is in the team chat.
 
 # Final Presentation (Oct 20)
 
-**Owner:** Tray · Rehearsal: Oct 19
+**Presenter:** one person, picked by the team (Tray is away) · Rehearsal: Oct 19
 
-| # | Section | Speaker | Time |
-|---|---|---|---|
-| 1 | Problem: label errors (wrong net weight, missing allergens) cause recalls; manual checks are slow | Tray | 1 min |
-| 2 | Live demo (script below) | Tray + Wenyi | 4 min |
-| 3 | Architecture and API contract | Tray | 1.5 min |
-| 4 | Verification engine: match / missing / incorrect / uncertain | Amzad | 1.5 min |
-| 5 | CI/CD and deployment | Vincent | 1 min |
-| 6 | AI-assisted development: what we delegated, what we reviewed, the reusable Skill | All | 2 min |
-| 7 | Limits and next steps | Tray | 1 min |
+| # | Section | Time |
+|---|---|---|
+| 1 | Problem: label errors (wrong net weight, missing allergens) cause recalls; manual checks are slow | 1 min |
+| 2 | Live demo (see demo-guide.md) | 4 min |
+| 3 | Architecture and API contract | 1.5 min |
+| 4 | Verification engine: match / missing / incorrect / uncertain | 1.5 min |
+| 5 | CI/CD and deployment | 1 min |
+| 6 | AI-assisted development: what we delegated, what we reviewed, the reusable Skill | 2 min |
+| 7 | Limits and next steps | 1 min |
 
 ## Demo script (https://ai-product-label-verification.vercel.app)
 1. Create spec **Golden Harvest Granola** (values from `data/sample_labels/specs.json`).
