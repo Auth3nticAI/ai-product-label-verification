@@ -38,17 +38,17 @@ Local automated evidence: F1–F9 matched `data/sample_labels/manifest.json` on 
 
 | # | File | Expected status | Expected field flags | Actual | Result |
 |---|---|---|---|---|---|
-| F1 | granola_correct.png | Pass | all match | | |
-| F2 | granola_wrong_net_weight.png | Needs Review | net_contents incorrect | | |
+| F1 | granola_correct.png | Pass | all match | Pass, 7/7 match (Tray, scripted Edge run on production, Oct 18 (`docs/assets/screenshots/`)) | PASS |
+| F2 | granola_wrong_net_weight.png | Needs Review | net_contents incorrect | Needs Review; net_contents incorrect ("Net Wt 10 oz (283 g)"), evidence crop shown (Tray, scripted Edge run on production, Oct 18 (`docs/assets/screenshots/`)) | PASS |
 | F3 | granola_missing_allergens.png | Needs Review | allergens missing | | |
 | F4 | coffee_correct.png | Pass | all match | | |
 | F5 | coffee_brand_typo.png | Needs Review | brand incorrect | | |
 | F6 | coffee_wrong_best_by.png | Needs Review | best_by incorrect | | |
 | F7 | vitamin_correct.png | Pass | all match | | |
 | F8 | vitamin_wrong_sku.png | Needs Review | sku incorrect | | |
-| F9 | vitamin_low_quality.jpg | Needs Review | allergens + best_by **uncertain** (not incorrect) | | |
+| F9 | vitamin_low_quality.jpg | Needs Review | allergens + best_by **uncertain** (not incorrect) | Needs Review; allergens uncertain (0.62), best_by uncertain (0.85), manufacturer **missing** (Tray, scripted Edge run on production, Oct 18 (`docs/assets/screenshots/`)) | PASS (verdict and both expected flags; see the F9 note) |
 
-For every F row also check: the **Issues** count in History equals the number of non-match fields (F9 → 2), every flagged field has its own explanation box under the table (missing ones included), and *Extracted text* lists the OCR lines with low-confidence ones dimmed.
+For every F row also check: the **Issues** count in History equals the number of non-match fields (F9 → **3**: the two expected *uncertain* fields plus manufacturer *missing*, because since the Oct 17 OCR change that blurry line isn't read at all; the manifest's notes allow a manufacturer false alarm. Found by Vincent's QA pass), every flagged field has its own explanation box under the table (missing ones included), and *Extracted text* lists the OCR lines with low-confidence ones dimmed.
 
 ## 2c. Additional synthetic regression pack (local API only)
 
@@ -66,7 +66,7 @@ The committed [QA fixture pack](../tests/e2e/fixtures/README.md) uses the team's
 
 | # | Test | Expected | Actual | Result |
 |---|---|---|---|---|
-| S1 | Home → **Try a Sample Inspection** | Inspect opens with `granola_wrong_net_weight.png` loaded (real file name and size) and **Golden Harvest Granola** selected; the notice says it's a real sample | | |
+| S1 | Home → **Try a Sample Inspection** | Inspect opens with `granola_wrong_net_weight.png` loaded (real file name and size) and **Golden Harvest Granola** selected; the notice says it's a real sample | As expected: real file (57 KB), spec selected, real-sample notice (Tray, scripted Edge run on production, Oct 18 (`docs/assets/screenshots/`)) | PASS |
 | S2 | Press **Verify Label** on S1 | A real result: Needs Review, `net_contents` incorrect ("Net Wt 10 oz (283 g)"), a close-up crop of the net weight line; a new row appears in History | | |
 | S3 | Locally with an empty database, run S1–S2 | The sample creates the Golden Harvest Granola spec once, then inspects | | |
 | M1 | Specs → **New spec** → name + 2 fields → Save | The spec appears, selected, showing "2 fields • Created {today}" | | |
@@ -80,7 +80,7 @@ The committed [QA fixture pack](../tests/e2e/fixtures/README.md) uses the team's
 | # | Test | Expected | Actual | Result |
 |---|---|---|---|---|
 | H1 | Open history after F1–F9 | All 9 listed, newest first, with timestamps | | |
-| H2 | Reopen one inspection from history | Same status and fields as when it ran | | |
+| H2 | Reopen one inspection from history | Same status and fields as when it ran | Detail page shows the saved result (Tray, scripted Edge run on production, Oct 18 (`docs/assets/screenshots/`)) | PASS |
 | H3 | Reload the page / come back later | History still there (stored in the database) | | |
 | E1 | Upload with no spec selected | Clear error, nothing saved | | |
 | E2 | Upload a non-image | Clear error message, not a crash | | |
@@ -142,11 +142,11 @@ The verifier now matches B04's `g 100`/`100 g` table order, H01's `14 0Z`/`14 OZ
 
 | # | Test | Expected | Actual | Result |
 |---|---|---|---|---|
-| B1 | Open **Pricing** from the nav | 3 plans: Starter $49, Professional $149 (Most popular), Enterprise $499; limits listed; "14-day free trial" | | |
-| B2 | Toggle **Annual** | Prices show per-month equivalent ($40.83 / $124.17 / $415.83) billed annually, "2 months free" | | |
-| B3 | Professional → **Start 14-day trial** → card 4242 4242 4242 4242 | Stripe Checkout opens; after paying you land on "Confirming your subscription…", then "You're on Professional" within seconds | | |
-| B4 | Sidebar after B3 | Plan badge "Professional · Trial" + **Manage billing** | | |
-| B5 | **Manage billing** | Stripe Customer Portal opens for this subscription; switch plan / cancel works; badge updates after returning | | |
+| B1 | Open **Pricing** from the nav | 3 plans: Starter $49, Professional $149 (Most popular), Enterprise $499; limits listed; "14-day free trial" | As expected (Tray, scripted Edge run on production, Oct 18 (`docs/assets/screenshots/`)) | PASS |
+| B2 | Toggle **Annual** | Prices show per-month equivalent ($40.83 / $124.17 / $415.83) billed annually, "2 months free" | $40.83 / $124.17 / $415.83; $490 / $1,490 / $4,990 billed annually (Tray, scripted Edge run on production, Oct 18 (`docs/assets/screenshots/`)) | PASS |
+| B3 | Professional → **Start 14-day trial** → card 4242 4242 4242 4242 | Stripe Checkout opens; after paying you land on "Confirming your subscription…", then "You're on Professional" within seconds | Checkout opened (sandbox); after paying: Confirming… then "You're on Professional, trial ends Nov 1". Gotcha: untick Stripe's "Save my information with Link" or it requires a phone number (Tray, scripted Edge run on production, Oct 18 (`docs/assets/screenshots/`)) | PASS |
+| B4 | Sidebar after B3 | Plan badge "Professional · Trial" + **Manage billing** | Badge "Professional · Trial" + Manage billing; Pricing shows "Current plan" (Tray, scripted Edge run on production, Oct 18 (`docs/assets/screenshots/`)) | PASS |
+| B5 | **Manage billing** | Stripe Customer Portal opens for this subscription; switch plan / cancel works; badge updates after returning | Portal opened: VeriLabel Professional $149/mo, Visa 4242, $0 trial invoice. Switch/cancel **not tested** (Tray, scripted Edge run on production, Oct 18 (`docs/assets/screenshots/`)) | PARTIAL |
 | B6 | Try **Start trial** again while subscribed | Message to use Manage billing; no second checkout | | |
 | B7 | Card 4000 0025 0000 3155 | 3-D Secure challenge, then success | | |
 | B8 | Cancel on the Stripe Checkout page | Back on /pricing, nothing changed | | |

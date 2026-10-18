@@ -7,6 +7,8 @@
 **Go / No-go:** No-go for final sign-off pending production UI and device tests · Assessed by: Vincent via Codex · Date: Oct 18, 2026 UTC
 One-line reason: The sample OCR and local API workflow pass, but the complete deployed UI flow, mobile photo uploads, and rehearsal have not been verified in this QA pass. Reassess after the remaining checks; this is an evidence gap, not a confirmed app failure.
 
+**Update, Oct 18 ~16:00 UTC (Tray), after this verdict was written:** a scripted real-browser run (Edge) on production passed the deployed UI flow (F1, F2, F9, S1, H2) and billing **B1–B4** (B5 partial: portal opens; switch/cancel untested). Evidence: `docs/assets/screenshots/`, rows marked in [qa-test-plan.md](qa-test-plan.md). **Still open for Vincent's sign-off:** real devices (D3/D4, E3/E5 phone photos), spec management in the UI (M1–M4), the remaining F/H/E rows, B5 switch/cancel, B6–B9. Vincent's verdict above stands until he reassesses.
+
 ## Pre-demo checklist (Tue Oct 20, 30 min before)
 
 - [ ] https://ai-product-label-verification.vercel.app loads on the presenting laptop and on a phone
