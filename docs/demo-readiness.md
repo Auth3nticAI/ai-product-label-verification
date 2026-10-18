@@ -29,7 +29,7 @@ One-line reason: ___
 | 4 | Upload `vitamin_wrong_sku.png` | **Needs Review**: sku incorrect | |
 | 5 | Upload `vitamin_low_quality.jpg` | **Needs Review**: best_by **uncertain**, not incorrect | |
 | 6 | Open history | All of the above, with timestamps | |
-| 6b | Pricing → Professional → Start trial → 4242 card | Success page confirms; sidebar shows "Professional · Trial"; Manage billing opens the portal | |
+| 6b | Pricing → Professional → Start trial → 4242 card | Success page confirms; sidebar shows "Professional · Trial"; Manage billing opens the portal | **PASS** Oct 18 (scripted real-browser run on production; see `demo-guide.md` §6) |
 | 7 | GitHub: PRs, CI, Skill, AI-usage log | Green checks, merged PRs from every member | |
 
 ## Test evidence
