@@ -56,6 +56,13 @@ def test_normalize_keeps_digits_distinct():
     assert normalize("Net Wt 12 oz") != normalize("Net Wt 10 oz")
 
 
+def test_normalize_recovers_common_unit_ocr_errors_without_changing_quantity():
+    assert normalize("NET WT 14 0Z (397g)") == normalize("NET WT 14 OZ (397g)")
+    assert normalize("NET WT 14 0Z (397g)") != normalize("NET WT 12 OZ (340g)")
+    assert normalize("g 100") == normalize("100 g")
+    assert normalize("g 100") != normalize("120 g")
+
+
 # --- per-field status --------------------------------------------------------------
 
 
@@ -115,6 +122,19 @@ def test_dedicated_line_beats_substring_elsewhere():
     lines = [("Peek Roasters", 0.99), ("Peak Roasters LLC, Denver, CO", 0.99)]
     r = check(lines, "Peak Roasters")
     assert (r.status, r.found) == (INCORRECT, "Peek Roasters")
+
+
+def test_numeric_value_with_explanatory_suffix_beats_short_duplicate_heading():
+    lines = [("Porción: 12 g (1 cuchara de sopa)", 0.98), ("Porción", 0.99)]
+    r = verify_label(label(*lines), {"serving_size": "Porción: 12 g"}).fields[0]
+    assert (r.status, r.found) == (MATCH, "Porción: 12 g (1 cuchara de sopa)")
+    assert check([("SKU: VC-MV-0600", 0.99)], "SKU: VC-MV-060").status != MATCH
+
+
+def test_weak_fuzzy_read_near_confidence_cutoff_is_uncertain():
+    assert check([("Inutelal", 0.9029)], "nutella").status == UNCERTAIN
+    assert check([("ORIJINAL TAT", 0.9409)], "Coca-Cola Original Taste").status == UNCERTAIN
+    assert check([("Peek Roasters", 0.99)], "Peak Roasters").status == INCORRECT
 
 
 def test_value_wrapped_across_two_lines_is_match():

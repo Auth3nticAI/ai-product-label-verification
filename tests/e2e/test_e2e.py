@@ -4,7 +4,7 @@ Expectations come from data/sample_labels/manifest.json, so adding a sample adds
 """
 import pytest
 
-from conftest import MANIFEST, SAMPLES, require_implemented, upload
+from conftest import MANIFEST, SAMPLES, SPECS, require_implemented, upload
 
 
 def test_health(api):
@@ -51,17 +51,22 @@ def test_inspection_verdict_matches_manifest(api, spec_ids, sample):
     results = {f["field"]: f["status"] for f in inspection["results"]}
 
     assert inspection["status"] == sample["expected_status"], results
+    assert inspection["image_filename"] == sample["image"]
+    assert set(results) == set(SPECS[sample["spec_id"]]["fields"])
+    assert inspection["ocr"]["lines"]  # The verdict must come from actual OCR evidence.
     for field, expected in sample["expected_flags"].items():
         assert results[field] == expected, f"{field}: {results}"
+    assert sum(status != "match" for status in results.values()) >= len(sample["expected_flags"])
     if not sample["degraded"]:  # clean photo: every un-flagged field must match exactly
         for field, status in results.items():
             if field not in sample["expected_flags"]:
                 assert status == "match", f"{field}: {results}"
+        assert sum(status != "match" for status in results.values()) == len(sample["expected_flags"])
 
     # It's saved, and it shows up in history.
     saved = require_implemented(api.get(f"/inspections/{inspection['id']}"))
     assert saved.status_code == 200
-    assert saved.json()["status"] == inspection["status"]
+    assert saved.json() == inspection
     history = require_implemented(api.get("/inspections")).json()
     assert inspection["id"] in [i["id"] for i in history]
 

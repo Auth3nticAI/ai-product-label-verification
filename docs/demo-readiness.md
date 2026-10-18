@@ -4,8 +4,8 @@
 
 ## Verdict
 
-**Go / No-go:** ___ · Assessed by: ___ · Date: ___
-One-line reason: ___
+**Go / No-go:** No-go for final sign-off pending production UI and device tests · Assessed by: Vincent via Codex · Date: Oct 18, 2026 UTC
+One-line reason: The sample OCR and local API workflow pass, but the complete deployed UI flow, mobile photo uploads, and rehearsal have not been verified in this QA pass. Reassess after the remaining checks; this is an evidence gap, not a confirmed app failure.
 
 ## Pre-demo checklist (Tue Oct 20, 30 min before)
 
@@ -34,15 +34,15 @@ One-line reason: ___
 
 ## Test evidence
 
-Summary from [qa-test-plan.md](qa-test-plan.md): ___ of ___ tests pass. Open bugs: ___ (link each)
+Summary from [qa-test-plan.md](qa-test-plan.md): 10/10 deployed OCR cases passed on Oct 17. On Oct 18, the hardened branch passed 182/182 backend unit tests and 21/21 local API end-to-end tests with an isolated SQLite database; strict E2E also passed 21/21. All eight cases using seven hash-verified manufacturer images passed the isolated local spec → inspection → history API workflow. A harder set of 18 cases from 11 public product photos had **16/18 expected verdicts, 13/18 exact field-status maps, and 18/18 saved inspections**. The two remaining verdict misses are conservative review flags for low-confidence Heinz and stylized Nutella brand reads; the correct serving-size line and `0Z` unit read are now handled. The deployed API passed 7/7 read-only-mode checks before the newer cases were added; nine production write checks were skipped. The expanded local suite passed 7 with 14 write tests skipped in read-only mode. One additional open QA finding: current OCR drops most of the blurry vitamin manufacturer line, and local F9 has three issues rather than the plan's expected two. No issue has been filed or production inspection run for that finding. The production UI F/S/M/H/E/D/P/B rows remain unscored; do not count the local API results as those UI tests.
 
 ## Known limitations (say these out loud if asked)
 
-- OCR can misread blurry photos with high confidence. Example: "Health" read as "Heath" at 0.95, which can flag a correct field as incorrect. The overall result is still Needs Review, so nothing bad gets passed.
+- OCR can lose text from a blurry photo. On Oct 18, the deployed OCR returned only `TX` for the vitamin sample's manufacturer line; the local verifier marked that field missing, in addition to the two expected uncertain fields. The overall result is still Needs Review, but F9's issue count needs production verification.
 - Uploads are limited to 4.5 MB by hosting; the app shrinks photos first.
 - No user accounts: anyone with the link can create specs and inspections.
-- Synthetic sample labels; ___ real phone photos tested.
-- ___
+- Synthetic sample labels, seven manufacturer artwork files, and 11 public real product photos tested through the local API. No fresh phone capture or device/browser upload was tested in this pass.
+- Production spec creation, Inspect-to-History UI flow, browser/device coverage, and billing remain to be tested before final sign-off.
 
 ## Fallback plan
 

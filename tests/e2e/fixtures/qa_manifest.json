@@ -1,0 +1,43 @@
+{
+  "source": "Fully synthetic. Generated with generate_qa_label.py from data/sample_labels/generate_samples.py and its Golden Harvest Granola spec; no private or real product photo.",
+  "cases": [
+    {
+      "id": "two-independent-defects",
+      "image": "granola_two_issues.png",
+      "spec_id": "granola",
+      "printed_changes": {
+        "net_contents": "Net Wt 10 oz (283 g)",
+        "allergens": null
+      },
+      "expected_status": "needs_review",
+      "expected_flags": {
+        "net_contents": "incorrect",
+        "allergens": "missing"
+      },
+      "expected_issue_count": 2
+    }
+  ],
+  "invalid_uploads": [
+    {
+      "id": "plain-text",
+      "filename": "notes.txt",
+      "content_type": "text/plain",
+      "payload": "Synthetic QA text, not an image",
+      "expected_detail": "File is not a readable image"
+    },
+    {
+      "id": "corrupt-png",
+      "filename": "corrupt.png",
+      "content_type": "image/png",
+      "payload": "Synthetic QA bytes, not a PNG",
+      "expected_detail": "File is not a readable image"
+    },
+    {
+      "id": "empty-png",
+      "filename": "empty.png",
+      "content_type": "image/png",
+      "payload": "",
+      "expected_detail": "Empty upload"
+    }
+  ]
+}

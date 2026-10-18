@@ -36,6 +36,8 @@ NEEDS_REVIEW = "needs_review"
 
 MIN_CONFIDENCE = 0.90  # below this, OCR can't be trusted to tell a misprint from a misread
 SIMILAR_RATIO = 0.60  # "Net Wt 10 oz (283 g)" vs "Net Wt 12 oz (340 g)" scores ~0.69
+WEAK_MISMATCH_SIMILARITY = 0.80
+STRONG_MISMATCH_CONFIDENCE = 0.95
 
 
 @dataclass
@@ -63,6 +65,14 @@ class VerificationResult:
 
 
 def normalize(text: str) -> str:
+    # OCR commonly reads the letter O in the unit "OZ" as zero. Limit this
+    # repair to a separate unit after a numeric quantity, leaving SKU digits
+    # and the weight's actual numeric value untouched.
+    text = re.sub(r"(?i)(\b\d+(?:[.,]\d+)?\s+)0z\b", r"\1oz", text)
+    # On some nutrition tables OCR reports the unit column before its value.
+    # Only reorder a whole, two-token line: never rearrange arbitrary prose.
+    if match := re.fullmatch(r"\s*(g|kg|ml|l|oz)\s+(\d+(?:[.,]\d+)?)\s*", text, re.I):
+        text = f"{match.group(2)}{match.group(1)}"
     return re.sub(r"[^a-z0-9]", "", text.lower())
 
 
@@ -96,17 +106,46 @@ def _check_field(name: str, expected: str, lines: list[OcrLine]) -> FieldResult:
         if _spans_break(target, a_text, b_text):
             return result(MATCH, f"{a.text}\n{b.text}", min(a.confidence, b.confidence))
 
+    # A precise numeric field at the start of a longer explanatory line is
+    # stronger evidence than a second, shorter heading (e.g. "Porción" alone).
+    # Require a word boundary so SKU-060 does not match SKU-0600. Brand-only
+    # substring matches still wait until after fuzzy whole-line comparison.
+    if any(ch.isdigit() for ch in expected):
+        needle = expected.strip().casefold()
+        for line, _ in normed:
+            haystack = line.text.strip().casefold()
+            if haystack.startswith(needle) and (len(haystack) == len(needle)
+                                             or not haystack[len(needle)].isalnum()):
+                return result(MATCH, line.text, line.confidence)
+
     scored = [(similarity(target, text), line, text) for line, text in normed if text]
     if scored:
         score, line, text = max(scored, key=lambda s: s[0])
         if score >= SIMILAR_RATIO:
-            return result(MATCH if target in text else INCORRECT, line.text, line.confidence)
+            status = MATCH if _contains_target(target, text) else INCORRECT
+            # A weakly similar, barely confident OCR line is evidence of an
+            # unclear photo, not enough to claim the physical label is wrong.
+            if (status == INCORRECT and score <= WEAK_MISMATCH_SIMILARITY
+                    and line.confidence < STRONG_MISMATCH_CONFIDENCE):
+                status = UNCERTAIN
+            return result(status, line.text, line.confidence)
 
     for line, text in normed:
-        if target in text:
+        if _contains_target(target, text):
             return result(MATCH, line.text, line.confidence)
 
     return FieldResult(name, expected, None, MISSING, 0.0)
+
+
+def _contains_target(target: str, text: str) -> bool:
+    """Do not count a quantity or SKU as matched by a longer digit sequence."""
+    start = text.find(target)
+    while start != -1:
+        end = start + len(target)
+        if not (target[-1].isdigit() and end < len(text) and text[end].isdigit()):
+            return True
+        start = text.find(target, start + 1)
+    return False
 
 
 def _spans_break(target: str, first: str, second: str) -> bool:

@@ -1,0 +1,632 @@
+{
+  "cases": [
+    {
+      "id": "B01-front-control",
+      "image": "barilla-pesto-front.jpg",
+      "difficulty": [
+        "curved-packaging",
+        "brand-layout"
+      ],
+      "truth_kind": "visible_match",
+      "visible_truth": "Barilla; PESTO; alla GENOVESE are visibly printed.",
+      "expected_status": "pass",
+      "actual_status": "pass",
+      "expected_fields": {
+        "brand": "match",
+        "product_name": "match"
+      },
+      "actual_fields": {
+        "brand": "match",
+        "product_name": "match"
+      },
+      "verdict_met": true,
+      "fields_met": true,
+      "persisted": true,
+      "ocr_mean_confidence": 0.9021,
+      "ocr_text": "PESTO\nDA\uff2c1877\nBarilla\nalla GENOVESE\nPARMIGIANO\nRECIANO",
+      "field_evidence": [
+        {
+          "field": "brand",
+          "expected": "Barilla",
+          "found": "Barilla",
+          "status": "match",
+          "confidence": 1.0
+        },
+        {
+          "field": "product_name",
+          "expected": "PESTO",
+          "found": "PESTO",
+          "status": "match",
+          "confidence": 0.9968
+        }
+      ]
+    },
+    {
+      "id": "B02-front-wrong-variant",
+      "image": "barilla-pesto-front.jpg",
+      "difficulty": [
+        "curved-packaging",
+        "subtle-spec-mismatch"
+      ],
+      "truth_kind": "visible_mismatch",
+      "visible_truth": "Front says alla GENOVESE, not SICILIANA; source image is the same as B01.",
+      "expected_status": "needs_review",
+      "actual_status": "needs_review",
+      "expected_fields": {
+        "variant": "incorrect"
+      },
+      "actual_fields": {
+        "variant": "missing"
+      },
+      "verdict_met": true,
+      "fields_met": false,
+      "persisted": true,
+      "ocr_mean_confidence": 0.9021,
+      "ocr_text": "PESTO\nDA\uff2c1877\nBarilla\nalla GENOVESE\nPARMIGIANO\nRECIANO",
+      "field_evidence": [
+        {
+          "field": "variant",
+          "expected": "alla SICILIANA",
+          "found": null,
+          "status": "missing",
+          "confidence": 0.0
+        }
+      ]
+    },
+    {
+      "id": "B03-ingredients-tiny",
+      "image": "barilla-pesto-ingredients.jpg",
+      "difficulty": [
+        "tiny-print",
+        "dense-ingredients",
+        "narrow-crop"
+      ],
+      "truth_kind": "visible_match",
+      "visible_truth": "First ingredient line visibly says sunflower seed oil 44.5%, basil 30%, cashew nuts.",
+      "expected_status": "pass",
+      "actual_status": "pass",
+      "expected_fields": {
+        "ingredients": "match"
+      },
+      "actual_fields": {
+        "ingredients": "match"
+      },
+      "verdict_met": true,
+      "fields_met": true,
+      "persisted": true,
+      "ocr_mean_confidence": 0.9736,
+      "ocr_text": "PESTO SAUCE WITH BASIL. INGREDIENTS: sunflower seed oil44.5%, basil 30%, cashew nuts, Grana Padano PDO cheese\n4.5% (milk, ysozyme from egg), whey powder (milk), alt, Pecorino Romano PDO cheese 1.2% (mik), sugar, extra- virgin live oil\n1%, basil extract, natural flavouring (milk), garlic, buttermilk poder (milk), acidity regulator: lactic acid. May be present: traces of\nother tree nuts. For Australia imported by Barilla Australia Pty Ltd, 4 Annandale Street, Annandale, NSW 2038.",
+      "field_evidence": [
+        {
+          "field": "ingredients",
+          "expected": "sunflower seed oil 44.5%, basil 30%, cashew nuts",
+          "found": "PESTO SAUCE WITH BASIL. INGREDIENTS: sunflower seed oil44.5%, basil 30%, cashew nuts, Grana Padano PDO cheese",
+          "status": "match",
+          "confidence": 0.9887
+        }
+      ]
+    },
+    {
+      "id": "B04-nutrition-multilingual",
+      "image": "barilla-pesto-nutrition.jpg",
+      "difficulty": [
+        "curved-packaging",
+        "multilingual",
+        "small-table"
+      ],
+      "truth_kind": "visible_match",
+      "visible_truth": "Nutrition declaration is per 100 g, with French/German/Dutch text. This is a nutrition basis, not a serving size.",
+      "expected_status": "pass",
+      "actual_status": "pass",
+      "expected_fields": {
+        "nutrition_basis": "match"
+      },
+      "actual_fields": {
+        "nutrition_basis": "match"
+      },
+      "verdict_met": true,
+      "fields_met": true,
+      "persisted": true,
+      "ocr_mean_confidence": 0.9588,
+      "ocr_text": "D\u00e9claration nutritionnelle-\nN\u00e4hrwertdeklaration-\nVoedingswaarden\ng 100\n\u00c9nergie - Energie -\nkJ2030\nEnergie\nkcal 492\nMati\u00e8res grasses - Fett-\nVetten\n47\n6\ndont acides gras satur\u00e9s-\ndavon ges\u00e4ttigte Fetts\u00e4uren -\ng 5,3\nwaarvan verzadigde vetzuren\nGlucides - Kohlenhydrate-\n11\nKoolhydraten\nB\ndont sucres - davon Zucker-\ng 5,0\nwaarvan suikers\nE\nFibres alimentaires -\n30\nBallaststoffe - Vezels\nProt\u00e9ines-Eiwei\u00df-Eiwitten\n32\n9\nSel-Sl - out\nGLUTENFREI/SANS GLUTEN/\nGLUTENVRIJ",
+      "field_evidence": [
+        {
+          "field": "nutrition_basis",
+          "expected": "100 g",
+          "found": "g 100",
+          "status": "match",
+          "confidence": 0.97
+        }
+      ]
+    },
+    {
+      "id": "C01-front-clipped",
+      "image": "coca-cola-front.jpg",
+      "difficulty": [
+        "low-resolution",
+        "clipped-logo",
+        "unreadable"
+      ],
+      "truth_kind": "unreadable_or_absent",
+      "visible_truth": "Only part of the Coca-Cola logo is in frame; top slogan is truncated/distorted. The full product name is not legible.",
+      "expected_status": "needs_review",
+      "actual_status": "needs_review",
+      "expected_fields": {
+        "product_name": "missing"
+      },
+      "actual_fields": {
+        "product_name": "uncertain"
+      },
+      "verdict_met": true,
+      "fields_met": false,
+      "persisted": true,
+      "ocr_mean_confidence": 0.9409,
+      "ocr_text": "ORIJINAL TAT",
+      "field_evidence": [
+        {
+          "field": "product_name",
+          "expected": "Coca-Cola Original Taste",
+          "found": "ORIJINAL TAT",
+          "status": "uncertain",
+          "confidence": 0.9409
+        }
+      ]
+    },
+    {
+      "id": "C02-rotated-ingredients",
+      "image": "coca-cola-ingredients.jpg",
+      "difficulty": [
+        "rotation",
+        "glare",
+        "curved-packaging",
+        "dense-print"
+      ],
+      "truth_kind": "visible_match",
+      "visible_truth": "Rotated can visibly states Ingredients: Carbonated Water, Sugar, Colour (Caramel E150d).",
+      "expected_status": "pass",
+      "actual_status": "pass",
+      "expected_fields": {
+        "ingredients": "match"
+      },
+      "actual_fields": {
+        "ingredients": "match"
+      },
+      "verdict_met": true,
+      "fields_met": true,
+      "persisted": true,
+      "ocr_mean_confidence": 0.9008,
+      "ocr_text": "OP\n*Refe\n1078\nIngredients: Carbonated Water.\nng Soft Drink with\nBest before: See hase\nStore\nPlant\nspar",
+      "field_evidence": [
+        {
+          "field": "ingredients",
+          "expected": "Ingredients: Carbonated Water",
+          "found": "Ingredients: Carbonated Water.",
+          "status": "match",
+          "confidence": 0.9639
+        }
+      ]
+    },
+    {
+      "id": "C03-rotated-wrong-sweetener",
+      "image": "coca-cola-ingredients.jpg",
+      "difficulty": [
+        "rotation",
+        "glare",
+        "subtle-spec-mismatch"
+      ],
+      "truth_kind": "visible_mismatch",
+      "visible_truth": "Can says Sugar, not Sweetener; same image as C02.",
+      "expected_status": "needs_review",
+      "actual_status": "needs_review",
+      "expected_fields": {
+        "ingredients": "incorrect"
+      },
+      "actual_fields": {
+        "ingredients": "incorrect"
+      },
+      "verdict_met": true,
+      "fields_met": true,
+      "persisted": true,
+      "ocr_mean_confidence": 0.9008,
+      "ocr_text": "OP\n*Refe\n1078\nIngredients: Carbonated Water.\nng Soft Drink with\nBest before: See hase\nStore\nPlant\nspar",
+      "field_evidence": [
+        {
+          "field": "ingredients",
+          "expected": "Ingredients: Carbonated Water, Sweetener",
+          "found": "Ingredients: Carbonated Water.",
+          "status": "incorrect",
+          "confidence": 0.9639
+        }
+      ]
+    },
+    {
+      "id": "C04-curved-nutrition",
+      "image": "coca-cola-nutrition.jpg",
+      "difficulty": [
+        "curved-packaging",
+        "glare",
+        "small-table"
+      ],
+      "truth_kind": "visible_match",
+      "visible_truth": "Can visibly states 330ml near the upper right.",
+      "expected_status": "pass",
+      "actual_status": "pass",
+      "expected_fields": {
+        "net_contents": "match"
+      },
+      "actual_fields": {
+        "net_contents": "match"
+      },
+      "verdict_met": true,
+      "fields_met": true,
+      "persisted": true,
+      "ocr_mean_confidence": 0.8971,
+      "ocr_text": "Coke\nORIGINAL\nTASTE\n330mle\nSparkling Soft Drink with\nNUTRITION INFO RMATION TYPICAL VALUES\nPlant Extracts\nPer:\n330ml\n100mlL\nIngredients: Carbonated Water,\n594kJ1\n180kJ/\nEnergy:\nSiger,Cor Carmel E150d).\n42kcal139kcal\n(7)\nd Phophoric cid). Natural\nB8\u8c46\n6060 6656060\nOg\nFat:\nPavourngs Cafine elevourng.\nOg\nof which saturates:\n10.6g\nCarbohydrate:\n(392)\n10.6g\nof which sugars:\n9\nProtein:\nSalt:\nBesthetor:ese of can.\n*Reference intke of an average adult\nSurecol and dry.\n(8400kJ/2000kcal)",
+      "field_evidence": [
+        {
+          "field": "net_contents",
+          "expected": "330ml",
+          "found": "330ml",
+          "status": "match",
+          "confidence": 0.9999
+        }
+      ]
+    },
+    {
+      "id": "H01-front-control",
+      "image": "heinz-ketchup-front.jpg",
+      "difficulty": [
+        "low-resolution",
+        "tiny-weight"
+      ],
+      "truth_kind": "visible_match",
+      "visible_truth": "Front visibly says HEINZ, TOMATO KETCHUP, NET WT 14 OZ (397g).",
+      "expected_status": "pass",
+      "actual_status": "needs_review",
+      "expected_fields": {
+        "brand": "match",
+        "product_name": "match",
+        "net_contents": "match"
+      },
+      "actual_fields": {
+        "brand": "uncertain",
+        "product_name": "match",
+        "net_contents": "match"
+      },
+      "verdict_met": false,
+      "fields_met": false,
+      "persisted": true,
+      "ocr_mean_confidence": 0.9273,
+      "ocr_text": "HEINZ\n8517 1869 t517\nTOMATO\nKETCHUP\n57VARIETIES\nNET WT 14 0Z (397g)\n5179383-001",
+      "field_evidence": [
+        {
+          "field": "brand",
+          "expected": "HEINZ",
+          "found": "HEINZ",
+          "status": "uncertain",
+          "confidence": 0.7881
+        },
+        {
+          "field": "product_name",
+          "expected": "TOMATO KETCHUP",
+          "found": "TOMATO\nKETCHUP",
+          "status": "match",
+          "confidence": 0.9754
+        },
+        {
+          "field": "net_contents",
+          "expected": "NET WT 14 OZ (397g)",
+          "found": "NET WT 14 0Z (397g)",
+          "status": "match",
+          "confidence": 0.9517
+        }
+      ]
+    },
+    {
+      "id": "H02-front-wrong-weight",
+      "image": "heinz-ketchup-front.jpg",
+      "difficulty": [
+        "low-resolution",
+        "tiny-weight",
+        "subtle-spec-mismatch"
+      ],
+      "truth_kind": "visible_mismatch",
+      "visible_truth": "Front says NET WT 14 OZ (397g), not 12 OZ (340g); same image as H01.",
+      "expected_status": "needs_review",
+      "actual_status": "needs_review",
+      "expected_fields": {
+        "net_contents": "incorrect"
+      },
+      "actual_fields": {
+        "net_contents": "incorrect"
+      },
+      "verdict_met": true,
+      "fields_met": true,
+      "persisted": true,
+      "ocr_mean_confidence": 0.9273,
+      "ocr_text": "HEINZ\n8517 1869 t517\nTOMATO\nKETCHUP\n57VARIETIES\nNET WT 14 0Z (397g)\n5179383-001",
+      "field_evidence": [
+        {
+          "field": "net_contents",
+          "expected": "NET WT 12 OZ (340g)",
+          "found": "NET WT 14 0Z (397g)",
+          "status": "incorrect",
+          "confidence": 0.9517
+        }
+      ]
+    },
+    {
+      "id": "H03-ingredients-spanish",
+      "image": "heinz-ketchup-ingredients.jpg",
+      "difficulty": [
+        "multilingual",
+        "motion-blur",
+        "dense-ingredients"
+      ],
+      "truth_kind": "visible_match",
+      "visible_truth": "Spanish panel visibly begins INGREDIENTES: CONCENTRADO DE TOMATE.",
+      "expected_status": "pass",
+      "actual_status": "pass",
+      "expected_fields": {
+        "ingredients": "match"
+      },
+      "actual_fields": {
+        "ingredients": "match"
+      },
+      "verdict_met": true,
+      "fields_met": true,
+      "persisted": true,
+      "ocr_mean_confidence": 0.8626,
+      "ocr_text": "INGREDIENTES: CONCENTRADO DE TOMATE (AGUA Y PASTA DE TOMATE)\nAZ\u00daCARES A\u00d1ADIDOS (JARABE DE MA\u00cdZ DE ALTA FRUCTOSA Y JARABE DE MA\u00cdZ),\nVNA E A CA A EA DLA A OLAO\nSABORIZANTE NATURAL. DECLARACI\u00d3N NUTRIMENTAL Tama\u00e3\u00f1 de la pori\u00f3on:",
+      "field_evidence": [
+        {
+          "field": "ingredients",
+          "expected": "CONCENTRADO DE TOMATE",
+          "found": "INGREDIENTES: CONCENTRADO DE TOMATE (AGUA Y PASTA DE TOMATE)",
+          "status": "match",
+          "confidence": 0.9921
+        }
+      ]
+    },
+    {
+      "id": "H04-ingredients-wrong-item",
+      "image": "heinz-ketchup-ingredients.jpg",
+      "difficulty": [
+        "multilingual",
+        "motion-blur",
+        "subtle-spec-mismatch"
+      ],
+      "truth_kind": "visible_mismatch",
+      "visible_truth": "Spanish panel says CONCENTRADO DE TOMATE, not CONCENTRADO DE PIMIENTO; same image as H03.",
+      "expected_status": "needs_review",
+      "actual_status": "needs_review",
+      "expected_fields": {
+        "ingredients": "incorrect"
+      },
+      "actual_fields": {
+        "ingredients": "missing"
+      },
+      "verdict_met": true,
+      "fields_met": false,
+      "persisted": true,
+      "ocr_mean_confidence": 0.8626,
+      "ocr_text": "INGREDIENTES: CONCENTRADO DE TOMATE (AGUA Y PASTA DE TOMATE)\nAZ\u00daCARES A\u00d1ADIDOS (JARABE DE MA\u00cdZ DE ALTA FRUCTOSA Y JARABE DE MA\u00cdZ),\nVNA E A CA A EA DLA A OLAO\nSABORIZANTE NATURAL. DECLARACI\u00d3N NUTRIMENTAL Tama\u00e3\u00f1 de la pori\u00f3on:",
+      "field_evidence": [
+        {
+          "field": "ingredients",
+          "expected": "CONCENTRADO DE PIMIENTO",
+          "found": null,
+          "status": "missing",
+          "confidence": 0.0
+        }
+      ]
+    },
+    {
+      "id": "H05-nutrition-serving",
+      "image": "heinz-ketchup-nutrition.jpg",
+      "difficulty": [
+        "multilingual",
+        "soft-focus",
+        "small-table"
+      ],
+      "truth_kind": "visible_match",
+      "visible_truth": "Nutrition panel visibly says Porci\u00f3n: 12 g (1 cuchara de sopa).",
+      "expected_status": "pass",
+      "actual_status": "pass",
+      "expected_fields": {
+        "serving_size": "match"
+      },
+      "actual_fields": {
+        "serving_size": "match"
+      },
+      "verdict_met": true,
+      "fields_met": true,
+      "persisted": true,
+      "ocr_mean_confidence": 0.9632,
+      "ocr_text": "Peso Neto\nInformaci\u00f3n Nutricional\nPorci\u00f3n: 12 g (1 cuchara de sopa)\nCantidad por\n% VD M)\nPorci\u00f3n\n14 kcal =59 kJ\nValor energ\u00e9tico\n1\n4,0g\n\u4e00\nCarbohidratos\n0\n0g\nProteinas\n0\n0g\nGrasas totales\nGrasas saturadas\n0g\n0\nGrasas trans\n0g\nFibra alimentaria\n0g\n0\nSodio\n113mg\n5\n(*) % Valores Diarios con base a una dieta\nde 2000 kca\u00ed s 3400 kJ. Sus valores diario",
+      "field_evidence": [
+        {
+          "field": "serving_size",
+          "expected": "Porci\u00f3n: 12 g",
+          "found": "Porci\u00f3n: 12 g (1 cuchara de sopa)",
+          "status": "match",
+          "confidence": 0.9928
+        }
+      ]
+    },
+    {
+      "id": "H06-nutrition-wrong-serving",
+      "image": "heinz-ketchup-nutrition.jpg",
+      "difficulty": [
+        "multilingual",
+        "soft-focus",
+        "subtle-spec-mismatch"
+      ],
+      "truth_kind": "visible_mismatch",
+      "visible_truth": "Panel says Porci\u00f3n: 12 g, not 15 g; same image as H05.",
+      "expected_status": "needs_review",
+      "actual_status": "needs_review",
+      "expected_fields": {
+        "serving_size": "incorrect"
+      },
+      "actual_fields": {
+        "serving_size": "incorrect"
+      },
+      "verdict_met": true,
+      "fields_met": true,
+      "persisted": true,
+      "ocr_mean_confidence": 0.9632,
+      "ocr_text": "Peso Neto\nInformaci\u00f3n Nutricional\nPorci\u00f3n: 12 g (1 cuchara de sopa)\nCantidad por\n% VD M)\nPorci\u00f3n\n14 kcal =59 kJ\nValor energ\u00e9tico\n1\n4,0g\n\u4e00\nCarbohidratos\n0\n0g\nProteinas\n0\n0g\nGrasas totales\nGrasas saturadas\n0g\n0\nGrasas trans\n0g\nFibra alimentaria\n0g\n0\nSodio\n113mg\n5\n(*) % Valores Diarios con base a una dieta\nde 2000 kca\u00ed s 3400 kJ. Sus valores diario",
+      "field_evidence": [
+        {
+          "field": "serving_size",
+          "expected": "Porci\u00f3n: 15 g",
+          "found": "Porci\u00f3n",
+          "status": "incorrect",
+          "confidence": 0.9998
+        }
+      ]
+    },
+    {
+      "id": "N01-front-control",
+      "image": "nutella-front.jpg",
+      "difficulty": [
+        "stylized-type",
+        "brand-layout"
+      ],
+      "truth_kind": "visible_match",
+      "visible_truth": "Front visibly says nutella and 400G.",
+      "expected_status": "pass",
+      "actual_status": "needs_review",
+      "expected_fields": {
+        "brand": "match",
+        "net_contents": "match"
+      },
+      "actual_fields": {
+        "brand": "uncertain",
+        "net_contents": "match"
+      },
+      "verdict_met": false,
+      "fields_met": false,
+      "persisted": true,
+      "ocr_mean_confidence": 0.9423,
+      "ocr_text": "Inutelal\n400G",
+      "field_evidence": [
+        {
+          "field": "brand",
+          "expected": "nutella",
+          "found": "Inutelal",
+          "status": "uncertain",
+          "confidence": 0.9029
+        },
+        {
+          "field": "net_contents",
+          "expected": "400G",
+          "found": "400G",
+          "status": "match",
+          "confidence": 0.9816
+        }
+      ]
+    },
+    {
+      "id": "N02-front-wrong-weight",
+      "image": "nutella-front.jpg",
+      "difficulty": [
+        "stylized-type",
+        "subtle-spec-mismatch"
+      ],
+      "truth_kind": "visible_mismatch",
+      "visible_truth": "Front says 400G, not 450G; same image as N01.",
+      "expected_status": "needs_review",
+      "actual_status": "needs_review",
+      "expected_fields": {
+        "net_contents": "incorrect"
+      },
+      "actual_fields": {
+        "net_contents": "incorrect"
+      },
+      "verdict_met": true,
+      "fields_met": true,
+      "persisted": true,
+      "ocr_mean_confidence": 0.9423,
+      "ocr_text": "Inutelal\n400G",
+      "field_evidence": [
+        {
+          "field": "net_contents",
+          "expected": "450G",
+          "found": "400G",
+          "status": "incorrect",
+          "confidence": 0.9816
+        }
+      ]
+    },
+    {
+      "id": "N03-low-light-brand",
+      "image": "nutella-ingredients.jpg",
+      "difficulty": [
+        "low-light",
+        "clutter",
+        "curved-packaging",
+        "metadata-mistag"
+      ],
+      "truth_kind": "visible_match",
+      "visible_truth": "Despite Open Food Facts' ingredients view tag, this photo shows the jar front in a dark room; nutella is visible.",
+      "expected_status": "pass",
+      "actual_status": "pass",
+      "expected_fields": {
+        "brand": "match"
+      },
+      "actual_fields": {
+        "brand": "match"
+      },
+      "verdict_met": true,
+      "fields_met": true,
+      "persisted": true,
+      "ocr_mean_confidence": 0.9901,
+      "ocr_text": "nutella\nFERRERO\n100g",
+      "field_evidence": [
+        {
+          "field": "brand",
+          "expected": "nutella",
+          "found": "nutella",
+          "status": "match",
+          "confidence": 0.9716
+        }
+      ]
+    },
+    {
+      "id": "N04-low-light-absent-panel",
+      "image": "nutella-ingredients.jpg",
+      "difficulty": [
+        "low-light",
+        "occlusion",
+        "metadata-mistag",
+        "absent-field"
+      ],
+      "truth_kind": "unreadable_or_absent",
+      "visible_truth": "The photo is of the front; no ingredients panel is visible. The database view tag must not be treated as evidence.",
+      "expected_status": "needs_review",
+      "actual_status": "needs_review",
+      "expected_fields": {
+        "ingredients": "missing"
+      },
+      "actual_fields": {
+        "ingredients": "missing"
+      },
+      "verdict_met": true,
+      "fields_met": true,
+      "persisted": true,
+      "ocr_mean_confidence": 0.9901,
+      "ocr_text": "nutella\nFERRERO\n100g",
+      "field_evidence": [
+        {
+          "field": "ingredients",
+          "expected": "hazelnuts",
+          "found": null,
+          "status": "missing",
+          "confidence": 0.0
+        }
+      ]
+    }
+  ]
+}
