@@ -23,7 +23,7 @@ export default function Home() {
         <h1><span className="headline-lead">Catch label mistakes</span><span className="headline-followup">before your next production run.</span></h1>
         <p className="hero-description">One wrong label can mean wasted packaging, costly reprints, and delayed shipments. VeriLabel compares photographed product labels with your approved specifications, highlighting differences and unreadable fields so your team knows what needs attention.</p>
         <div className="hero-actions"><Link href="/inspect?demo=1" className="primary-button">Try a Sample Inspection <span aria-hidden="true">→</span></Link><Link href="/specs?new=1" className="outline-button">Create a Specification</Link></div>
-        <p className="hero-demo-note">Explore a demo with a sample label and illustrative results.</p>
+        <p className="hero-demo-note">Runs a real check on a sample label with a wrong net weight.</p>
         <ul className="hero-checks">{checks.map(c=><li key={c}><Check size={16} strokeWidth={2} aria-hidden="true" />{c}</li>)}</ul>
       </div>
       <div className="hero-visual">
